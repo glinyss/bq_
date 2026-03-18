@@ -36,18 +36,6 @@ function parseItemPanelCSV(text) {
     alert("База предметов (itempanel.csv) успешно загружена! Иконки подключены.");
 }
 
-function loadItemPanelCSV() {
-    fetch('itempanel.csv')
-    .then(r => r.arrayBuffer())
-    .then(buffer => {
-        const text = new TextDecoder('windows-1251').decode(buffer);
-        parseItemPanelCSV(text);
-    })
-    .catch(err => {
-        console.warn("Could not auto-load itempanel.csv (CORS or missing). Please use the button.");
-    });
-}
-
 // Call on load
 loadItemPanelCSV();
 
