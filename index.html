@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetterQuesting Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header class="toolbar">
+            <h1>BQ Editor 1.7.10</h1>
+            <div style="flex:1; padding: 0 30px; position:relative;">
+                <input type="text" id="questSearch" placeholder="Поиск квестов (ID или Название)..." style="width: 100%; max-width: 400px; padding: 8px; border-radius: 8px; background: rgba(0,0,0,0.3); color: white; border: 1px solid var(--border-color);" autocomplete="off">
+                <div id="questSearchResults" style="display:none; position:absolute; top: 100%; left: 30px; width: 100%; max-width: 400px; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 8px; max-height: 400px; overflow-y: auto; z-index: 2000; flex-direction: column;"></div>
+            </div>
+            <div class="actions">
+                <input type="file" id="fileInput" accept=".json" title="Load QuestDatabase.json">
+                <input type="file" id="iconFileInput" accept=".csv" title="Load itempanel.csv" style="display:none;">
+                <button onclick="document.getElementById('iconFileInput').click()">Load itempanel.csv</button>
+                <button id="btnSave">Save Database</button>
+                <button id="btnAddQuest" style="display:none;">Add Quest</button>
+                <button id="btnLinkQuests" style="display:none; background: #334155;">Link Mode: OFF</button>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <aside class="sidebar" id="questLinesSidebar">
+                <h3>Quest Lines</h3>
+                <ul id="questLinesList"></ul>
+                <button id="btnAddQuestLine">+ Add Line</button>
+            </aside>
+            
+            <main class="editor-area">
+                <div class="canvas-container" id="canvasContainer">
+                    <svg id="connectionsCanvas"></svg>
+                    <div id="questCanvas"></div>
+                </div>
+            </main>
+            
+            <aside class="properties-panel" id="propertiesPanel">
+                <h3>Properties</h3>
+                <div id="propertiesContent">
+                    <p>Select a quest to edit</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <div id="itemPickerModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>Выбрать предмет</h3>
+            <input type="text" id="itemSearchQuery" placeholder="Поиск (ID, название)..." autocomplete="off" />
+            <div class="item-results" id="itemSearchResults"></div>
+            <button class="close-btn" onclick="document.getElementById('itemPickerModal').style.display='none'">Отмена</button>
+        </div>
+    </div>
+
+    <script src="js/nbtJson.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/editor.js"></script>
+
+    <div id="authControl" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">
+        <button id="btnLogin" style="padding: 5px 10px; cursor: pointer;">Admin Login</button>
+        <span id="userStatus" style="color: white; margin-left: 10px; display: none;">Admin Mode</span>
+    </div>
+</body>
+</html>
