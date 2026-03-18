@@ -432,3 +432,11 @@ function renderGlobalSearchResults(query) {
 
 questSearch.addEventListener('blur', () => { setTimeout(() => questSearchResults.style.display = 'none', 100); });
 questSearch.addEventListener('focus', () => { if(questSearch.value) questSearchResults.style.display = 'flex'; });
+
+document.getElementById('btnLogin').onclick = () => {
+    const token = prompt("Введите GitHub Token:");
+    if (token) {
+        localStorage.setItem('gh_token', token);
+        alert("Авторизован!");
+    }
+};
